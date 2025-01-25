@@ -2,6 +2,7 @@ import React from "react";
 import Header from "./Header";
 import HeroSection from "./HeroSection";
 import Features from "./Features";
+import Mission from "./Mission";
 import Footer from "./Footer";
 
 const HomePage = () => {
@@ -10,6 +11,7 @@ const HomePage = () => {
       <Header />
       <HeroSection />
       <Features />
+      <Mission />
       <Footer />
     </div>
   );
