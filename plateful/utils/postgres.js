@@ -1,4 +1,4 @@
-import {Pool} from './pool.js';
+import {Pool} from 'pg';
 
 const pool = new Pool({
     host: 'localhost',
@@ -8,4 +8,12 @@ const pool = new Pool({
     database: 'plateful'
 });
 
-export default pool;
+export const query = async (text, params) => {
+    const client = await pool.connect();
+    try {
+      const res = await client.query(text, params);
+      return res;
+    } finally {
+      client.release();
+    }
+  };
