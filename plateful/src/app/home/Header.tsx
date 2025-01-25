@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 
 const Header = () => {
   return (
@@ -7,7 +8,7 @@ const Header = () => {
       <nav className="flex gap-4">
         <a href="#about" className="text-gray-700 hover:text-blue-500">About Us</a>
         <a href="#volunteer" className="text-gray-700 hover:text-blue-500">Volunteer Signup</a>
-        <a href="#login" className="text-gray-700 hover:text-blue-500">Log In</a>
+        <Link href="/login"className="text-gray-700 hover:text-blue-500">Log In</Link>
       </nav>
     </header>
   );
