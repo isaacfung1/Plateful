@@ -1,0 +1,16 @@
+import React from "react";
+
+const Header = () => {
+  return (
+    <header className="flex justify-between items-center px-6 py-4 bg-gray-100 shadow-md">
+      <div className="text-2xl font-bold text-black">Plateful</div>
+      <nav className="flex gap-4">
+        <a href="#about" className="text-gray-700 hover:text-blue-500">About Us</a>
+        <a href="#volunteer" className="text-gray-700 hover:text-blue-500">Volunteer Signup</a>
+        <a href="#login" className="text-gray-700 hover:text-blue-500">Log In</a>
+      </nav>
+    </header>
+  );
+};
+
+export default Header;
