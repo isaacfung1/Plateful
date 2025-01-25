@@ -1,13 +1,18 @@
 import React from "react";
-import HomePage from "../components/home/HomePage";
-import "../styles/globals.css";
+import Header from "./Header";
+import HeroSection from "./HeroSection";
+import Mission from "./Mission";
+import Features from "./Features";
+import Footer from "./Footer";
 
-const App = () => {
+export default function HomePage() {
   return (
     <div>
-      <HomePage />
+      <Header />
+      <HeroSection />
+      <div className="z-10"><Features /></div>
+      <div className="z-20"><Mission /></div>
+      <Footer />
     </div>
   );
 };
-
-export default App;

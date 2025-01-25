@@ -3,9 +3,9 @@ import Link from "next/link";
 
 const HeroSection = () => {
   return (
-    <section className="text-center py-20 green-bg">
-      <h1 className="text-7xl font-bold text-gray-800">Plateful</h1>
-      <p className="mt-4 text-lg text-gray-600">
+    <section className="text-center py-20 bg-bg-main">
+      <h1 className="text-8xl font-bold text-green-bg">Plateful</h1>
+      <p className="mt-4 text-lg text-green-bg">
         Connecting grocery stores, food banks, and volunteers to reduce food waste and feed the community.
       </p>
       <div className="mt-8">
