@@ -3,22 +3,35 @@
 import React, { useState } from "react";
 
 const RegisterForm = () => {
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle registration logic here
-  };
+    const response = await fetch('/api/register', {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ username, email, password }),
+  });
+
+  if (response.ok) {
+    console.log("User registered successfully");
+  } else {
+    console.error("Failed to register user");
+  }
+};
 
   return (
     <form onSubmit={handleSubmit} className="mt-6 fade-in">
     <div className="mb-4">
-        <label className="block text-gray-700">Name</label>
+        <label className="block text-gray-700">Username</label>
         <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          type="name"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
           className="w-full px-4 py-2 mt-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
           required
         />
