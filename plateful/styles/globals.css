@@ -32,3 +32,19 @@ body {
 .fade-in {
   animation: fadeIn 1s ease-in-out;
 }
+
+.bg-beige {
+  background-color: #f7f7e6; /* Light beige color */
+}
+
+.custom-shadow {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); /* Larger shadow */
+}
+
+.bg-cover {
+  background-size: cover;
+}
+
+.bg-center {
+  background-position: center;
+}

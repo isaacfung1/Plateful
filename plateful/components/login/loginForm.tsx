@@ -27,7 +27,7 @@ const LoginForm = () => {
         {/* Sign In Button */}
         <button
           type="submit"
-          className="w-full bg-green-600 text-white rounded-lg py-2 hover:bg-green-700 transition"
+          className="w-full bg-green-800 text-white rounded-lg py-2 hover:bg-green-700 transition"
         >
           Sign In
         </button>
