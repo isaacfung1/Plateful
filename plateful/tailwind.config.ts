@@ -17,6 +17,8 @@ export default {
         "light-green": "#e4f223",
         "dark-green": "#0b4d3f",
       },
+      fontFamily: {
+      }
     },
   },
   plugins: [],
