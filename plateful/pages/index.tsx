@@ -1,5 +1,6 @@
 import React from "react";
-import HomePage from "./HomePage";
+import HomePage from "../components/home/HomePage";
+import "../styles/globals.css";
 
 const App = () => {
   return (
