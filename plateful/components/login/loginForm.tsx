@@ -15,6 +15,15 @@ const LoginForm = () => {
           />
         </div>
 
+        {/* Username Input */}
+        <div className="flex items-center bg-white border border-gray-300 rounded-lg p-3">
+          <input
+            type="email"
+            placeholder="Email"
+            className="w-full outline-none text-gray-700"
+          />
+        </div>
+
         {/* Password Input */}
         <div className="flex items-center bg-white border border-gray-300 rounded-lg p-3">
           <input
