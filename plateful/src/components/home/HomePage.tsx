@@ -14,11 +14,6 @@ const HomePage = () => {
       <HeroSection />
       <Features />
       <Mission />
-      <div className="flex justify-center mt-8">
-        <Link href="/map" className="bg-green-800 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition">
-            View Map
-        </Link>
-      </div>
       <Footer />
     </div>
   );
