@@ -18,6 +18,8 @@ const LoginForm = () => {
       body: JSON.stringify({ username, password }),
     });
 
+    console.log(username, password);
+
     if (response.ok) {
       const data = await response.json();
       console.log('User logged in successfully:', data.user);
@@ -38,18 +40,21 @@ const LoginForm = () => {
         {/* Username Input */}
         <div className="flex items-center bg-white border border-gray-300 rounded-lg p-3">
           <input
-            type="name"
+            type="text" 
             placeholder="Username"
+            value={username}  
+            onChange={(e) => setUsername(e.target.value)}  
             className="w-full outline-none text-gray-700"
           />
         </div>
 
-
-        {/* Password Input */}
+     
         <div className="flex items-center bg-white border border-gray-300 rounded-lg p-3">
           <input
             type="password"
             placeholder="Password"
+            value={password}  
+            onChange={(e) => setPassword(e.target.value)}  
             className="w-full outline-none text-gray-700"
           />
         </div>
@@ -62,14 +67,12 @@ const LoginForm = () => {
           Sign In
         </button>
 
-        {/* Sign-Up Link */}
         <div className="text-center text-sm text-gray-600">
           Don't have an account?{" "}
           <a href="/register" className="text-green-600 font-semibold hover:underline">
             Sign Up Now
           </a>
         </div>
-
       </form>
     </div>
   );
