@@ -57,7 +57,7 @@ const RegisterForm = () => {
             required
           />
         </div>
-
+        
         {/* Password Input */}
         <div className="flex items-center bg-white border border-gray-300 rounded-lg p-3">
           <input
