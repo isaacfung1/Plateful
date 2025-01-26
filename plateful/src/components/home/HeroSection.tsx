@@ -12,8 +12,7 @@ const HeroSection = () => {
     <section className="text-center py-20 bg-bg-main">
       <h1 className="text-8xl font-bold text-dark-green font-sans">Plateful</h1>
       <p className="mt-4 text-xl text-green-bg text-sans">
-        Connecting grocery stores, food banks, and volunteers to reduce food
-        waste and feed the community.
+        Fighting Food Insecurity One Plate at a Time
       </p>
       <div className="mt-8">
         <a

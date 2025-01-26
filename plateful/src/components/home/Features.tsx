@@ -24,7 +24,7 @@ export default function Features() {
     <section className="py-[5rem] bg-green-bg rounded-3xl drop-shadow-md overflow-hidden mt-[-1rem]">
       <div className=" mx-auto">
         <h2 className="text-6xl font-bold text-center mb-[5rem] text-white">
-          Our Features
+          OUR FEATURES
         </h2>
         <div className="conveyor-belt  ">
           <div className="h-full w-[150px] absolute bg-gradient-to-r from-green-bg  to-transparent z-50"></div>
