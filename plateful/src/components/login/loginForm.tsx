@@ -9,25 +9,29 @@ const LoginForm = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError(""); // Clear previous errors
 
-    const response = await fetch('/api/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ username, password }),
-    });
+    try {
+      const response = await fetch('/api/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password }),
+      });
 
-    console.log(username, password);
-
-    if (response.ok) {
-      const data = await response.json();
-      console.log('User logged in successfully:', data.user);
-      router.push('/volunteer');
-    } else {
-      const errorData = await response.json();
-      setError(errorData.error);
-      console.error('Login failed:', errorData.error);
+      if (response.ok) {
+        const data = await response.json();
+        console.log('User logged in successfully:', data.user);
+        router.push('/volunteer');
+      } else {
+        const errorData = await response.json();
+        setError(errorData.error || "Login failed. Please try again.");
+        console.error('Login failed:', errorData.error);
+      }
+    } catch (error) {
+      setError("An unexpected error occurred. Please try again.");
+      console.error('Login failed:', error);
     }
   };
 
@@ -40,22 +44,24 @@ const LoginForm = () => {
         {/* Username Input */}
         <div className="flex items-center bg-white border border-gray-300 rounded-lg p-3">
           <input
-            type="text" 
+            type="text"
             placeholder="Username"
-            value={username}  
-            onChange={(e) => setUsername(e.target.value)}  
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
             className="w-full outline-none text-gray-700"
+            required
           />
         </div>
 
-     
+        {/* Password Input */}
         <div className="flex items-center bg-white border border-gray-300 rounded-lg p-3">
           <input
             type="password"
             placeholder="Password"
-            value={password}  
-            onChange={(e) => setPassword(e.target.value)}  
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             className="w-full outline-none text-gray-700"
+            required
           />
         </div>
 
