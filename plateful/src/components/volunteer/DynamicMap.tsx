@@ -17,6 +17,7 @@ interface DynamicMapProps {
   groceryStore: GroceryStore;
   foodBanks: FoodBank[];
   initialCenter: Coordinate;
+  visible: boolean;
 }
 
 const getPinColor = (weight: number) => {
@@ -38,28 +39,33 @@ const foodBankIcon = L.icon({
   iconAnchor: [10, 33],
 });
 
-const DynamicMap: React.FC<DynamicMapProps> = ({ groceryStore, foodBanks, initialCenter }) => {
+const DynamicMap: React.FC<DynamicMapProps> = ({ groceryStore, foodBanks, initialCenter, visible }) => {
   return (
     <MapContainer center={[44.24, -76.5]} zoom={14} style={{ height: "500px", width: "100%" }}>
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       />
-      <Marker position={groceryStore.coords} icon={groceryStoreIcon} />
-      {foodBanks.map((foodBank, index) => (
-        <React.Fragment key={index}>
-          <Marker position={foodBank.coords} icon={foodBankIcon} />
-          <Circle // Circle around food bank
-            center={foodBank.coords}
-            radius={50} // Adjust the radius as needed
-            pathOptions={{ color: getPinColor(foodBank.weight), fillColor: getPinColor(foodBank.weight), fillOpacity: 0.5 }}
-          />
-          <Polyline // Line from grocery store to food bank
-            positions={[groceryStore.coords, foodBank.coords]}
-            pathOptions={{ color: getPinColor(foodBank.weight) }}
-          />
-        </React.Fragment>
-      ))}
+      {visible && (
+        <>
+          <Marker position={groceryStore.coords} icon={groceryStoreIcon} />
+          {foodBanks.map((foodBank, index) => (
+            <React.Fragment key={index}>
+              <Marker position={foodBank.coords} icon={foodBankIcon} />
+              <Circle // Circle around food bank
+                center={foodBank.coords}
+                radius={50} // Adjust the radius as needed
+                pathOptions={{ color: getPinColor(foodBank.weight), fillColor: getPinColor(foodBank.weight), fillOpacity: 0.5 }}
+              />
+              <Polyline // Line from grocery store to food bank
+                positions={[groceryStore.coords, foodBank.coords]}
+                pathOptions={{ color: getPinColor(foodBank.weight) }}
+              />
+            </React.Fragment>
+          ))}
+        </>
+      )}
+      
     </MapContainer>
   );
 };
