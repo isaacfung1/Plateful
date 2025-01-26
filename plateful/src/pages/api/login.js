@@ -9,6 +9,11 @@ export default async function handler(req, res) {
           'SELECT * FROM users WHERE username = $1 AND password = $2',
             [username, password]
         );
+
+        // Check if a match is found
+        if (result.rows.length === 0) {
+            return res.status(401).json({ message: 'Invalid username or password' });
+      }
         
         res.status(200).json({ user: result.rows[0] });
       } catch (error) {
