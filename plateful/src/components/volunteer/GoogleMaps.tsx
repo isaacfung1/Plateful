@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 
 // Set your Google Maps API key here
@@ -16,6 +16,23 @@ const center = {
 
 const GoogleMaps = () => {
     const [map, setMap] = useState<google.maps.Map | null>(null);
+    const [currentLocation, setCurrentLocation] = useState<{ lat:number, lng: number } | null>(null);
+
+    useEffect(() => {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(
+            (position) => {
+              const { latitude, longitude } = position.coords;
+              setCurrentLocation({ lat: latitude, lng: longitude });
+            },
+            (error) => {
+              console.error("Error getting geolocation:", error);
+            }
+          );
+        } else {
+          console.error("Geolocation is not supported by this browser.");
+        }
+      }, []);
 
     const onLoad = React.useCallback(function callback(map: google.maps.Map) {
         const bounds = new window.google.maps.LatLngBounds();
@@ -31,7 +48,7 @@ const GoogleMaps = () => {
         <LoadScript googleMapsApiKey={apiKey}>
             <GoogleMap
                 mapContainerStyle={containerStyle}
-                center={center}
+                center={currentLocation || { lat: 44.23, lng: -76.523 }}
                 zoom={10}
                 onLoad={onLoad}
                 onUnmount={onUnmount}
