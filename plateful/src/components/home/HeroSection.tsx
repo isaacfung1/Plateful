@@ -1,7 +1,13 @@
 import React from "react";
-import Link from "next/link";
 
 const HeroSection = () => {
+  const handleScroll = () => {
+    const missionSection = document.getElementById("mission");
+    if (missionSection) {
+      missionSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <section className="text-center py-20 bg-bg-main">
       <h1 className="text-8xl font-bold text-dark-green font-sans">Plateful</h1>
@@ -15,7 +21,9 @@ const HeroSection = () => {
           className="bg-light-green hover:font-bold text-green-bg px-6 py-3 rounded-lg mr-4 hover:bg-orange-400 inline-block">
           Sign Up
         </a>
-        <button className="bg-transparent border-2 text-green-bg border-green-bg px-6 py-3 rounded-lg hover:bg-green-bg hover:font-bold hover:text-white inline-block">
+        <button
+          onClick={handleScroll}
+          className="bg-transparent border-2 text-green-bg border-green-bg px-6 py-3 rounded-lg hover:bg-green-bg hover:font-bold hover:text-white inline-block">
           Learn More
         </button>
       </div>
