@@ -19,6 +19,7 @@ const MapPage = () => {
   const relativeCenter: [number, number] = [44.2312, -76.4860]; // Coordinates used to simulate foodbanks around Kingston 
   const [groceryStore, setGroceryStore] = useState<GroceryStore>({ coords: initialCenter });
   const [foodBanks, setFoodBanks] = useState<FoodBank[]>([]);
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -33,7 +34,7 @@ const MapPage = () => {
 
       const scalingFactor = 0.0002; // used to keep the demo foodbanks within range
 
-      const foodBanks: FoodBank[] = data.slice(0, 7).map((row) => ({
+      const foodBanks: FoodBank[] = data.slice(7, 15).map((row) => ({
         // Coordinates have calculations to simulate the foodbanks within Kingston region
         coords: [ 
             relativeCenter[0] + (parseFloat(row.Bank_Location_X) - initialCenter[0]) * scalingFactor + 0.005, 
@@ -49,11 +50,15 @@ const MapPage = () => {
     fetchData();
   }, []);
 
+  const toggleVisibility = () => {
+    setVisible(!visible);
+  };
+
   return (
     <div>
-      <NewHeader />
+      <NewHeader toggleVisibility={toggleVisibility}/>
       <div style={{ height: "500px", width: "100%" }}>
-        <DynamicMap groceryStore={groceryStore} foodBanks={foodBanks} initialCenter={initialCenter} />
+        <DynamicMap groceryStore={groceryStore} foodBanks={foodBanks} initialCenter={initialCenter} visible={visible} />
       </div>
       <Footer />
     </div>
