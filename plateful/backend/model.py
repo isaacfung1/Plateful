@@ -6,7 +6,7 @@ from torch_geometric.data import Data
 from torch_geometric.nn import GATConv
 
 # Constants
-NUM_GROCERY_STORES = 150
+NUM_GROCERY_STORES = 10
 NUM_FOOD_BANKS = 40
 
 # Generate stores
@@ -106,12 +106,19 @@ import torch.nn.functional as F
 from torch_geometric.nn import GCNConv
 
 class FoodBankGNN(torch.nn.Module):
-    def __init__(self, input_dim, hidden_dim, output_dim):
+    def __init__(self, input_dim, hidden_dim, output_dim, heads=2):
         super().__init__()
-        self.conv1 = GCNConv(input_dim, hidden_dim)
-        self.conv2 = GCNConv(hidden_dim, hidden_dim)
+        self.conv1 = GATConv(input_dim, hidden_dim, heads=heads)
+        self.conv2 = GATConv(hidden_dim * heads, hidden_dim, heads=1)  # Single head for final layer
+        self.conv2 = GATConv(hidden_dim * heads, hidden_dim, heads=1)
+        self.conv3 = GATConv(hidden_dim, hidden_dim, heads=1)
+        self.conv4 = GATConv(hidden_dim, hidden_dim, heads=1)
         self.edge_mlp = torch.nn.Sequential(
             torch.nn.Linear(2 * hidden_dim, hidden_dim),
+            torch.nn.ReLU(),
+            torch.nn.Linear(hidden_dim, hidden_dim),
+            torch.nn.ReLU(),
+            torch.nn.Linear(hidden_dim, hidden_dim),
             torch.nn.ReLU(),
             torch.nn.Linear(hidden_dim, 1)
         )
@@ -128,10 +135,18 @@ class FoodBankGNN(torch.nn.Module):
         edge_features = torch.cat([x[row], x[col]], dim=1)
         edge_scores = self.edge_mlp(edge_features).squeeze()
         return edge_scores
-    
 
 
 from torch_geometric.loader import DataLoader
+
+def generate_multiple_graphs(num_graphs, num_stores, num_banks):
+    graphs = []
+    for _ in range(num_graphs):
+        grocery_stores = generate_grocery_stores(num_stores)
+        food_banks = generate_food_banks(num_banks)
+        data = create_data(grocery_stores, food_banks)
+        graphs.append(data)
+    return graphs
 
 # Training function
 def train(model, loader, optimizer, criterion, epochs=300):
@@ -161,13 +176,17 @@ def test(model, loader, criterion):
 # Create DataLoader
 loader = DataLoader([data], batch_size=1, shuffle=True)
 
+num_graphs = 10  # Number of graphs to generate
+graphs = generate_multiple_graphs(num_graphs, NUM_GROCERY_STORES, NUM_FOOD_BANKS)
+loader = DataLoader(graphs, batch_size=4, shuffle=True)  # Batch size can be adjusted
+
 # Initialize model, optimizer, and loss
-model = FoodBankGNN(input_dim=5, hidden_dim=64, output_dim=32)
-optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
-criterion = torch.nn.MSELoss()
+model = FoodBankGNN(input_dim=5, hidden_dim=64, output_dim=32, heads=2)
+optimizer = torch.optim.Adam(model.parameters(), lr=0.01)
+criterion = torch.nn.CrossEntropyLoss()
 
 # Train and test
-train(model, loader, optimizer, criterion, epochs=150)
+train(model, loader, optimizer, criterion, epochs=100)
 test(model, loader, criterion)
 
 
@@ -182,3 +201,42 @@ plt.scatter(true_values, predictions)
 plt.xlabel("True Edge Weights")
 plt.ylabel("Predicted Edge Weights")
 plt.show()
+
+
+
+# Ensure the model is in evaluation mode
+model.eval()
+
+# Get predictions
+with torch.no_grad():
+    predictions = model(data).numpy()
+
+# Extract edge indices and map to Store_ID and Bank_ID
+edge_indices = data.edge_index.t().numpy()  # Shape: [num_edges, 2]
+store_indices = edge_indices[:, 0]         # Indices of stores
+bank_indices = edge_indices[:, 1] - NUM_GROCERY_STORES  # Indices of food banks (adjusted for offset)
+
+# Map indices to IDs
+store_ids = [f"Store_{i+1}" for i in store_indices]
+bank_ids = [f"Bank_{i+1}" for i in bank_indices]
+
+# Extract locations
+store_locations = grocery_stores.iloc[store_indices][['Location_X', 'Location_Y']].values
+bank_locations = food_banks.iloc[bank_indices][['Location_X', 'Location_Y']].values
+
+# Create DataFrame
+results_df = pd.DataFrame({
+    'Store_ID': store_ids,
+    'Bank_ID': bank_ids,
+    'Store_Location_X': store_locations[:, 0],
+    'Store_Location_Y': store_locations[:, 1],
+    'Bank_Location_X': bank_locations[:, 0],
+    'Bank_Location_Y': bank_locations[:, 1],
+    'Predicted_Weight': predictions
+})
+
+# Save to CSV
+results_df.to_csv('store_bank_predictions.csv', index=False)
+
+# Display the first few rows of the DataFrame
+print(results_df.head())
