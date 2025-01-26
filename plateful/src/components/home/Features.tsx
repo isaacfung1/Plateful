@@ -23,7 +23,7 @@ export default function Features() {
   return (
     <section className="py-[5rem] bg-green-bg rounded-3xl drop-shadow-md overflow-hidden mt-[-1rem]">
       <div className=" mx-auto">
-        <h2 className="text-5xl font-bold text-center mb-10 text-white">
+        <h2 className="text-6xl font-bold text-center mb-[5rem] text-white">
           Our Features
         </h2>
         <div className="conveyor-belt  ">
@@ -36,10 +36,10 @@ export default function Features() {
                 key={index}
                 className="flex-col w-[50rem] justify-center items-center h-[10rem] px-[1rem] bg-bg-main rounded-lg shadow-md text-center"
               >
-                <h3 className="text-xl font-semibold text-gray-800 ">
+                <h3 className="text-2xl mt-[1rem] font-semibold text-gray-800 ">
                   {feature.title}
                 </h3>
-                <p className="mt-4 text-gray-600 ">{feature.description}</p>
+                <p className="mt-4 text-gray-600 text-xl ">{feature.description}</p>
               </div>
             ))}
           </div>

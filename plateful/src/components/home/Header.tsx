@@ -7,9 +7,8 @@ const Header = () => {
       
       <Link href="/" className="text-3xl font-bold text-green-bg">Plateful</Link>
       <nav className="flex gap-4">
-        <a href="#about" className="text-gray-700 hover:text-blue-500">About Us</a>
-        <a href="/register" className="text-gray-700 hover:text-blue-500">Volunteer Signup</a>
-        <Link href="/login"className="text-gray-700 hover:text-blue-500">Log In</Link>
+        <a href="/register" className="text-xl text-gray-700 hover:text-blue-500">Signup</a>
+        <Link href="/login"className="text-xl text-gray-700 hover:text-blue-500">Log In</Link>
       </nav>
     </header>
   );
