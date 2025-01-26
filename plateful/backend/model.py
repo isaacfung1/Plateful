@@ -3,6 +3,7 @@ import pandas as pd
 from scipy.spatial.distance import euclidean
 import torch
 from torch_geometric.data import Data
+from torch_geometric.nn import GATConv
 
 # Constants
 NUM_GROCERY_STORES = 150
