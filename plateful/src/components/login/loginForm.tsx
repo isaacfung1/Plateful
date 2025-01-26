@@ -23,7 +23,7 @@ const LoginForm = () => {
       if (response.ok) {
         const data = await response.json();
         console.log('User logged in successfully:', data.user);
-        router.push('/volunteer');
+        router.push('/map');
       } else {
         const errorData = await response.json();
         setError(errorData.error || "Login failed. Please try again.");

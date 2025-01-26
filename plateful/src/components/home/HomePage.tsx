@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import Header from "./Header";
 import HeroSection from "./HeroSection";
 import Features from "./Features";
