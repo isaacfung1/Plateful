@@ -4,7 +4,7 @@ import React from "react";
 
 export default function Mission() {
   return (
-    <section className="bg-bg-main pt-[0.5rem] pb-[15rem] rounded-3xl top-[-20px]">
+    <section id="mission" className="bg-bg-main pt-[0.5rem] pb-[15rem] rounded-3xl top-[-20px]">
       <h2 className="text-6xl text-green-bg font-bold text-center mt-[1.5rem]">
       Our Mission
       </h2>
