@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
 import NewHeader from "@/components/volunteer/NewHeader";
 import Footer from "../components/home/Footer";
-import DynamicMap from "../components/volunteer/DynamicMap";
 import Papa from "papaparse";
-import { init } from "next/dist/compiled/webpack/webpack";
+
+const DynamicMap = dynamic(() => import("../components/volunteer/DynamicMap"), {
+  ssr: false, // This line ensures the component is only rendered on the client side
+});
 
 interface FoodBank {
   coords: [number, number];
