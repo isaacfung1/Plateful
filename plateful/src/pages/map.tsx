@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Header from "../components/home/Header";
+import NewHeader from "@/components/volunteer/NewHeader";
 import Footer from "../components/home/Footer";
 import DynamicMap from "../components/volunteer/DynamicMap";
 import Papa from "papaparse";
@@ -51,7 +51,7 @@ const MapPage = () => {
 
   return (
     <div>
-      <Header />
+      <NewHeader />
       <div style={{ height: "500px", width: "100%" }}>
         <DynamicMap groceryStore={groceryStore} foodBanks={foodBanks} initialCenter={initialCenter} />
       </div>
