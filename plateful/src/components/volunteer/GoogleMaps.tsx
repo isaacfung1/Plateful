@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
+import Header from '../home/Header';
+import NewHeader from './NewHeader';
 
 // Set your Google Maps API key here
 const apiKey = 'AIzaSyAr3geQfmZtripTlM_xzkIW8YwQm275hno'; 
@@ -45,6 +47,8 @@ const GoogleMaps = () => {
     }, []);
 
     return (
+      <div>
+        <NewHeader />
         <LoadScript googleMapsApiKey={apiKey}>
             <GoogleMap
                 mapContainerStyle={containerStyle}
@@ -56,6 +60,7 @@ const GoogleMaps = () => {
                 <Marker position={center} />
             </GoogleMap>
         </LoadScript>
+      </div>
     );
 };
 
