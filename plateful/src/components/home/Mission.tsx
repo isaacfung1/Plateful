@@ -5,7 +5,7 @@ import React from "react";
 export default function Mission() {
   return (
     <section className="bg-bg-main pt-[0.5rem] pb-[15rem] rounded-3xl top-[-20px]">
-      <h2 className="text-6xl text-black font-bold text-center mt-[1.5rem]">
+      <h2 className="text-6xl text-green-bg font-bold text-center mt-[1.5rem]">
       Our Mission
       </h2>
       <div className="flex flex-row mx-[6rem] mt-[2.5rem] gap-[3rem]">
@@ -14,9 +14,9 @@ export default function Mission() {
       </div>
       <div className="flex-1">
       <div className="flex flex-col h-full p-[3.5rem]">
-        <h2 className="text-4xl text-black font-bold">Fighting food insecurity...</h2>
-        <h2 className="text-4xl text-black font-bold">One plate at a time</h2>
-        <p className="text-black text-2xl mt-16">
+        <h2 className="text-4xl text-green-bg">Fighting Food Insecurity..</h2>
+        <h2 className="text-4xl mt-[0.5rem] text-green-bg font-bold">One Plate at a Time</h2>
+        <p className="text-green-bg text-2xl mt-16">
         At Plateful, our mission is to combat food insecurity in Kingston by connecting grocery 
         stores with food banks through a streamlined digital platform. Using AI-driven insights,
          we optimize surplus food donations and volunteer delivery routes to reduce waste, improve 
