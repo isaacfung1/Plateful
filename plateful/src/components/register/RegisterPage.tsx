@@ -18,7 +18,7 @@ const RegisterPage = () => {
 
           {/* Right Side: Branding Section */}
           <div className="w-1/2 bg-green-800 text-white flex flex-col justify-center items-center p-10">
-            {/*<img src="/login-image.png" width={100} height={100} alt="Login Image" />*/}
+            <img src="/images/login-image.jpg" alt="" />
             <h1 className="text-3xl font-bold mb-4">Join Plateful</h1>
             <p className="text-lg text-center">
               Connecting surplus food with those in need. Together, we can make a difference.
