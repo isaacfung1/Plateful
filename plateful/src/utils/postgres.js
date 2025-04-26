@@ -1,11 +1,11 @@
 import {Pool} from 'pg';
 
 const pool = new Pool({
-    host: '10.216.81.16',
+    host: 'localhost',
     port: 5432,
     user: 'postgres',
     password: 'plateful',
-    database: 'plateful'
+    database: 'PlatefulDB'
 });
 
 export const query = async (text, params) => {
