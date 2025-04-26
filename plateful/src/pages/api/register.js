@@ -6,7 +6,7 @@ export default async function handler(req, res) {
   
       try {
         const result = await query(
-          'INSERT INTO users (username, email, password) VALUES ($1, $2, $3) RETURNING *',
+          'INSERT INTO userdata (username, email, password) VALUES ($1, $2, $3) RETURNING *',
           [username, email, password]
         );
         res.status(200).json({ user: result.rows[0] });

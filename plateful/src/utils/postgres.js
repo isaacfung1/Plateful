@@ -1,11 +1,13 @@
 import {Pool} from 'pg';
+require('dotenv').config()
+const dbPassword = process.env.DB_PASSWORD;
 
 const pool = new Pool({
-    host: '10.216.81.16',
+    host: 'localhost',
     port: 5432,
     user: 'postgres',
-    password: 'plateful',
-    database: 'plateful'
+    password: dbPassword,
+    database: 'plateful-tj'
 });
 
 export const query = async (text, params) => {
